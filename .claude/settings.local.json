@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//opt/homebrew/opt/**)",
+      "Read(//usr/local/**)",
+      "Read(//usr/bin/**)",
+      "Bash(echo $PATH)",
+      "mcp__playwright",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"\"messages\"\":[{\"\"role\"\":\"\"user\"\",\"\"content\"\":\"\"create a button\"\"}],\"\"files\"\":{}}')"
+    ]
+  }
+}
