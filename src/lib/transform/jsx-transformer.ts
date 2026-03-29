@@ -89,14 +89,45 @@ export interface ImportMapResult {
   errors: Array<{ path: string; error: string }>;
 }
 
+const KNOWN_PACKAGES: Record<string, string> = {
+  // React core
+  react: "https://esm.sh/react@19",
+  "react-dom": "https://esm.sh/react-dom@19",
+  "react-dom/client": "https://esm.sh/react-dom@19/client",
+  "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
+  "react/jsx-dev-runtime": "https://esm.sh/react@19/jsx-dev-runtime",
+  // Icons
+  "lucide-react": "https://esm.sh/lucide-react",
+  // Charts
+  recharts: "https://esm.sh/recharts",
+  // Animation
+  "framer-motion": "https://esm.sh/framer-motion",
+  // Utilities
+  clsx: "https://esm.sh/clsx",
+  "class-variance-authority": "https://esm.sh/class-variance-authority",
+  "tailwind-merge": "https://esm.sh/tailwind-merge",
+  "date-fns": "https://esm.sh/date-fns",
+  // Radix UI primitives
+  "@radix-ui/react-dialog": "https://esm.sh/@radix-ui/react-dialog",
+  "@radix-ui/react-popover": "https://esm.sh/@radix-ui/react-popover",
+  "@radix-ui/react-tabs": "https://esm.sh/@radix-ui/react-tabs",
+  "@radix-ui/react-select": "https://esm.sh/@radix-ui/react-select",
+  "@radix-ui/react-dropdown-menu": "https://esm.sh/@radix-ui/react-dropdown-menu",
+  "@radix-ui/react-tooltip": "https://esm.sh/@radix-ui/react-tooltip",
+  "@radix-ui/react-checkbox": "https://esm.sh/@radix-ui/react-checkbox",
+  "@radix-ui/react-switch": "https://esm.sh/@radix-ui/react-switch",
+  "@radix-ui/react-slider": "https://esm.sh/@radix-ui/react-slider",
+  "@radix-ui/react-accordion": "https://esm.sh/@radix-ui/react-accordion",
+  "@radix-ui/react-avatar": "https://esm.sh/@radix-ui/react-avatar",
+  "@radix-ui/react-progress": "https://esm.sh/@radix-ui/react-progress",
+  "@radix-ui/react-separator": "https://esm.sh/@radix-ui/react-separator",
+  "@radix-ui/react-label": "https://esm.sh/@radix-ui/react-label",
+  "@radix-ui/react-scroll-area": "https://esm.sh/@radix-ui/react-scroll-area",
+  "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot",
+};
+
 export function createImportMap(files: Map<string, string>): ImportMapResult {
-  const imports: Record<string, string> = {
-    react: "https://esm.sh/react@19",
-    "react-dom": "https://esm.sh/react-dom@19",
-    "react-dom/client": "https://esm.sh/react-dom@19/client",
-    "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
-    "react/jsx-dev-runtime": "https://esm.sh/react@19/jsx-dev-runtime",
-  };
+  const imports: Record<string, string> = { ...KNOWN_PACKAGES };
 
   // Transform each file and create blob URLs
   const transformedFiles = new Map<string, string>();
@@ -140,8 +171,10 @@ export function createImportMap(files: Map<string, string>): ImportMapResult {
                             !imp.startsWith("@/");
           
           if (isPackage) {
-            // Add third-party packages directly to import map
-            imports[imp] = `https://esm.sh/${imp}`;
+            // Use known package URL or fall back to esm.sh
+            if (!imports[imp]) {
+              imports[imp] = `https://esm.sh/${imp}`;
+            }
           } else {
             // Add local imports to be processed later
             allImports.add(imp);
@@ -221,9 +254,8 @@ export function createImportMap(files: Map<string, string>): ImportMapResult {
                       !importPath.startsWith("@/");
 
     if (isPackage) {
-      // Handle third-party packages from esm.sh
-      const packageUrl = `https://esm.sh/${importPath}`;
-      imports[importPath] = packageUrl;
+      // Use known package URL or fall back to esm.sh
+      imports[importPath] = KNOWN_PACKAGES[importPath] || `https://esm.sh/${importPath}`;
       continue;
     }
 
@@ -313,12 +345,37 @@ export function createPreviewHTML(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            display: ['DM Sans', 'Inter', 'sans-serif'],
+          },
+          animation: {
+            'spin-slow': 'spin 3s linear infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-in': 'fadeIn 0.3s ease-in-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+        },
+      },
+    };
+  </script>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     #root {
       width: 100vw;
