@@ -43,6 +43,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# local claude code settings
+.claude/settings.local.json
+
+# testing artifacts
+/.playwright-mcp/
+logs.txt
+
 # generated files
 /src/generated/prisma
 
