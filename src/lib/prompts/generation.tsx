@@ -19,7 +19,7 @@ These packages are available via esm.sh — import them directly by name:
 
 **Icons & UI:**
 - \`lucide-react\` — icon library (e.g. \`import { Search, Bell, User } from 'lucide-react'\`)
-- \`@radix-ui/react-dialog\`, \`@radix-ui/react-popover\`, \`@radix-ui/react-tabs\` — headless UI primitives
+- \`@radix-ui/react-dialog\`, \`@radix-ui/react-popover\`, \`@radix-ui/react-tabs\`, \`@radix-ui/react-select\`, \`@radix-ui/react-dropdown-menu\`, \`@radix-ui/react-tooltip\`, \`@radix-ui/react-checkbox\`, \`@radix-ui/react-switch\`, \`@radix-ui/react-slider\`, \`@radix-ui/react-accordion\`, \`@radix-ui/react-avatar\`, \`@radix-ui/react-progress\`, \`@radix-ui/react-label\`, \`@radix-ui/react-scroll-area\` — headless UI primitives
 
 **Charts & Data Visualization:**
 - \`recharts\` — charts (BarChart, LineChart, PieChart, AreaChart, etc.)

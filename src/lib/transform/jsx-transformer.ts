@@ -97,33 +97,33 @@ const KNOWN_PACKAGES: Record<string, string> = {
   "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
   "react/jsx-dev-runtime": "https://esm.sh/react@19/jsx-dev-runtime",
   // Icons
-  "lucide-react": "https://esm.sh/lucide-react",
+  "lucide-react": "https://esm.sh/lucide-react@0.475.0?deps=react@19",
   // Charts
-  recharts: "https://esm.sh/recharts",
+  recharts: "https://esm.sh/recharts@2.15.0?deps=react@19,react-dom@19",
   // Animation
-  "framer-motion": "https://esm.sh/framer-motion",
+  "framer-motion": "https://esm.sh/framer-motion@12.6.3?deps=react@19",
   // Utilities
   clsx: "https://esm.sh/clsx",
   "class-variance-authority": "https://esm.sh/class-variance-authority",
   "tailwind-merge": "https://esm.sh/tailwind-merge",
   "date-fns": "https://esm.sh/date-fns",
   // Radix UI primitives
-  "@radix-ui/react-dialog": "https://esm.sh/@radix-ui/react-dialog",
-  "@radix-ui/react-popover": "https://esm.sh/@radix-ui/react-popover",
-  "@radix-ui/react-tabs": "https://esm.sh/@radix-ui/react-tabs",
-  "@radix-ui/react-select": "https://esm.sh/@radix-ui/react-select",
-  "@radix-ui/react-dropdown-menu": "https://esm.sh/@radix-ui/react-dropdown-menu",
-  "@radix-ui/react-tooltip": "https://esm.sh/@radix-ui/react-tooltip",
-  "@radix-ui/react-checkbox": "https://esm.sh/@radix-ui/react-checkbox",
-  "@radix-ui/react-switch": "https://esm.sh/@radix-ui/react-switch",
-  "@radix-ui/react-slider": "https://esm.sh/@radix-ui/react-slider",
-  "@radix-ui/react-accordion": "https://esm.sh/@radix-ui/react-accordion",
-  "@radix-ui/react-avatar": "https://esm.sh/@radix-ui/react-avatar",
-  "@radix-ui/react-progress": "https://esm.sh/@radix-ui/react-progress",
-  "@radix-ui/react-separator": "https://esm.sh/@radix-ui/react-separator",
-  "@radix-ui/react-label": "https://esm.sh/@radix-ui/react-label",
-  "@radix-ui/react-scroll-area": "https://esm.sh/@radix-ui/react-scroll-area",
-  "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot",
+  "@radix-ui/react-dialog": "https://esm.sh/@radix-ui/react-dialog?deps=react@19,react-dom@19",
+  "@radix-ui/react-popover": "https://esm.sh/@radix-ui/react-popover?deps=react@19,react-dom@19",
+  "@radix-ui/react-tabs": "https://esm.sh/@radix-ui/react-tabs?deps=react@19,react-dom@19",
+  "@radix-ui/react-select": "https://esm.sh/@radix-ui/react-select?deps=react@19,react-dom@19",
+  "@radix-ui/react-dropdown-menu": "https://esm.sh/@radix-ui/react-dropdown-menu?deps=react@19,react-dom@19",
+  "@radix-ui/react-tooltip": "https://esm.sh/@radix-ui/react-tooltip?deps=react@19,react-dom@19",
+  "@radix-ui/react-checkbox": "https://esm.sh/@radix-ui/react-checkbox?deps=react@19,react-dom@19",
+  "@radix-ui/react-switch": "https://esm.sh/@radix-ui/react-switch?deps=react@19,react-dom@19",
+  "@radix-ui/react-slider": "https://esm.sh/@radix-ui/react-slider?deps=react@19,react-dom@19",
+  "@radix-ui/react-accordion": "https://esm.sh/@radix-ui/react-accordion?deps=react@19,react-dom@19",
+  "@radix-ui/react-avatar": "https://esm.sh/@radix-ui/react-avatar?deps=react@19,react-dom@19",
+  "@radix-ui/react-progress": "https://esm.sh/@radix-ui/react-progress?deps=react@19,react-dom@19",
+  "@radix-ui/react-separator": "https://esm.sh/@radix-ui/react-separator?deps=react@19,react-dom@19",
+  "@radix-ui/react-label": "https://esm.sh/@radix-ui/react-label?deps=react@19,react-dom@19",
+  "@radix-ui/react-scroll-area": "https://esm.sh/@radix-ui/react-scroll-area?deps=react@19,react-dom@19",
+  "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot?deps=react@19,react-dom@19",
 };
 
 export function createImportMap(files: Map<string, string>): ImportMapResult {
@@ -348,7 +348,6 @@ export function createPreviewHTML(
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -371,6 +370,7 @@ export function createPreviewHTML(
       },
     };
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       margin: 0;
